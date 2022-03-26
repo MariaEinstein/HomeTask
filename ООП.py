@@ -6,6 +6,7 @@ class Student:
         self.finished_courses = []
         self.courses_in_progress = []
         self.grades = {}
+        self.average_grade = ()
 
     def add_courses(self, course_name):
         self.finished_courses.append(course_name)
