@@ -12,7 +12,7 @@ class Student:
         self.finished_courses.append(course_name)
 
     def __str__(self):
-        output = f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за лекции: {average_grade(self.grades)}\nКурсы в процессе изучения: {self.courses_in_progress}\nЗавершенные курсы: {self.finished_courses}'
+        output = f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за лекции: {self.average_grade}\nКурсы в процессе изучения: {self.courses_in_progress}\nЗавершенные курсы: {self.finished_courses}'
         return output
 
     def rate_lecturer(self, specific_lecturer, course, grade):
@@ -61,8 +61,24 @@ class Lecturer(Mentor):
         self.courses_attached = []
 
     def __str__(self):
-        output = f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за лекции: {average_grade(self.grades)}'
+        output = f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за лекции: {self.average_grade}'
         return output
+    
+    
+        def average_grade(self, all_grades):
+        if type(all_grades) is dict:
+            amount_grades = []
+            for grades in all_grades.values():
+                for grade in grades:
+                    amount_grades.append(grade)
+            return self.averege_grade(amount_grades)
+        elif type(all_grades) is list and all_grades[0] != None:
+            average = round(sum(all_grades) / len(all_grades), 2)
+            return average
+        else:
+            return "Ошибка!"
+        
+        
 
     def __lt__(self):
         if isintasnce(other_lecturer, Lecturer):
