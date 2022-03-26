@@ -6,7 +6,6 @@ class Student:
         self.finished_courses = []
         self.courses_in_progress = []
         self.grades = {}
-        
 
     def add_courses(self, course_name):
         self.finished_courses.append(course_name)
@@ -23,29 +22,28 @@ class Student:
             specific_lecturer.grades.append(grade)
         else:
             return 'Ошибка'
-        
-        
+
+
     def average_grade(self, all_grades):
         if type(all_grades) is dict:
             amount_grades = []
             for grades in all_grades.values():
                 for grade in grades:
                     amount_grades.append(grade)
-            return averege_grade(amount_grades)
+            return self.averege_grade(amount_grades)
         elif type(all_grades) is list and all_grades[0] != None:
             average = round(sum(all_grades) / len(all_grades), 2)
             return average
         else:
             return "Ошибка!"
-        
 
     def __lt__(self, other_student):
         if isinstance(other_student, Student):
-            return average_grade(self.grades) < average_grade(other_student.grades)
+            return self.average_grade(self.grades) < self.average_grade(other_student.grades)
         else:
             return None
-        
-     
+
+
 
 
 class Mentor:
@@ -63,9 +61,8 @@ class Lecturer(Mentor):
     def __str__(self):
         output = f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за лекции: {self.average_grade}'
         return output
-    
-    
-        def average_grade(self, all_grades):
+
+    def average_grade(self, all_grades):
         if type(all_grades) is dict:
             amount_grades = []
             for grades in all_grades.values():
@@ -77,14 +74,15 @@ class Lecturer(Mentor):
             return average
         else:
             return "Ошибка!"
-        
-        
 
     def __lt__(self):
         if isintasnce(other_lecturer, Lecturer):
-            return average_grade(self.grades) < average_grade(other_lecturer.grades)
+            return self.average_grade(self.grades) < self.average_grade(other_lecturer.grades)
         else:
             return 'None'
+
+
+
 
 
 class Reviewer(Mentor):
@@ -115,14 +113,14 @@ class Reviewer(Mentor):
             for grades in all_grades.values():
                 for grade in grades:
                     amount_grades.append(grade)
-            return averege_grade(amount_grades)
+            return self.averege_grade(amount_grades)
         elif type(all_grades) is list and all_grades[0] != None:
             average = round(sum(all_grades) / len(all_grades), 2)
             return average
         else:
             return "Ошибка!"
 
-    # Функция расчета среднего значения оценокЖ
+    # Функция расчета среднего значения оценок
 
     def average_course_grade(all_students, current_course):
         all_course_grades = []
@@ -132,16 +130,16 @@ class Reviewer(Mentor):
                     all_course_grades.append(every_grade)
             else:
                 print(f'Курс {current_course} отсутствует у студента {current_student.name} {current_student.surname}')
-            return average_grade(all_course_grades)
+            return self.average_grade(all_course_grades)
 
     # Функция расчета среднего значения оценок:
-
     def average_lecturers_grade(all_lecturers):
         all_lecturers_grades = []
         for current_lecturer in all_lecturers:
             for every_grade in current_lecturer.grades:
                 all_lecturers_grades.append(every_grade)
-        return average_grade(all_lecturers_grades)
+        return self.average_grade(all_lecturers_grades)
+
 
 
 best_student = Student('Ruoy', 'Eman', 'your_gender')
@@ -197,6 +195,7 @@ cool_reviewer.courses_attached = ['Python']
 cool_reviewer_2 = Reviewer('Eddy', 'Grey')
 cool_reviewer_2.courses_attached = ['Git']
 
-print(student_1.name)
+print(student_1)
 
-print(student_1 < student_2)
+print(lecturer_1)
+
