@@ -23,7 +23,7 @@ def get_shop_list_by_dishes(dishes, person_count):
             if name_ingr in shopping_list:
                 ingr['quantity'] += shopping_list[name_ingr]['quantity']
             shopping_list.update({name_ingr: ingr})
-            print()
+     return shopping_list
 
 
 
